@@ -12,6 +12,6 @@ public class HelloWorldApplication {
 
   public static void main(String[] args) {
     Vertx vertx = Vertx.vertx();
-    vertx.deployVerticle(new MainVerticle());
+    vertx.deployVerticle(MainVerticle.class.getName());
   }
 }
