@@ -28,6 +28,7 @@
 
     <modules>
         <module>vertx-helloworld</module>
+        <module>vertx-route</module>
     </modules>
 
     <dependencyManagement>
