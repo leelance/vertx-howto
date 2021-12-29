@@ -10,7 +10,9 @@
     <name>vertx-howto</name>
 
     <properties>
-        <vertx.version>4.2.1</vertx.version>
+        <log4j2.version>2.17.1</log4j2.version>
+        <vertx.version>4.2.3</vertx.version>
+        <lombok.version>1.18.20</lombok.version>
         <!-- project -->
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,6 +20,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
         <!-- Test -->
         <dependency>
             <groupId>io.vertx</groupId>
@@ -27,6 +34,7 @@
     </dependencies>
 
     <modules>
+        <module>vertx-common</module>
         <module>vertx-helloworld</module>
         <module>vertx-route</module>
     </modules>

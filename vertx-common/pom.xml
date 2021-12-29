@@ -7,26 +7,19 @@
         <artifactId>vertx-howto</artifactId>
         <version>1.0-0-SNAPSHOT</version>
     </parent>
-    <groupId>com.lance.route</groupId>
-    <artifactId>vertx-route</artifactId>
+    <artifactId>vertx-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>vertx-route</name>
-    <description>vertx-route</description>
+    <name>vertx-common</name>
+    <packaging>pom</packaging>
+    <description>vertx-common</description>
 
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.lance.common</groupId>
-            <artifactId>vertx-common-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+
+    <modules>
+        <module>vertx-common-core</module>
+    </modules>
 </project>

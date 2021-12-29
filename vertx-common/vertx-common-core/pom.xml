@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.lance</groupId>
-        <artifactId>vertx-howto</artifactId>
-        <version>1.0-0-SNAPSHOT</version>
+        <artifactId>vertx-common</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.lance.route</groupId>
-    <artifactId>vertx-route</artifactId>
+    <groupId>com.lance.common</groupId>
+    <artifactId>vertx-common-core</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>vertx-route</name>
-    <description>vertx-route</description>
+    <name>vertx-common-core</name>
+    <description>vertx-common-core</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -19,14 +19,21 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
     <dependencies>
+
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-web</artifactId>
+            <artifactId>vertx-core</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.lance.common</groupId>
-            <artifactId>vertx-common-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.4</version>
         </dependency>
     </dependencies>
 </project>
