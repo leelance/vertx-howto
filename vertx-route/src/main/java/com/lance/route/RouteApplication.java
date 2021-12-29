@@ -1,5 +1,7 @@
 package com.lance.route;
 
+import io.vertx.core.Vertx;
+
 /**
  * Route application
  *
@@ -9,6 +11,7 @@ package com.lance.route;
 public class RouteApplication {
 
   public static void main(String[] args) {
-
+    Vertx vertx = Vertx.vertx();
+    vertx.deployVerticle(MainApp.class.getName());
   }
 }
