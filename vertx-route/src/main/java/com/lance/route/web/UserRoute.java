@@ -1,5 +1,6 @@
 package com.lance.route.web;
 
+import com.lance.route.service.UserService;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import org.slf4j.Logger;
@@ -17,19 +18,10 @@ public class UserRoute {
   public Router create(Vertx vertx) {
     log.info("=====>Init user router.");
     Router userRouter = Router.router(vertx);
+    UserService service = new UserService();
 
-    userRouter.get("/list").handler(ctx -> {
-      ctx.response()
-          .putHeader("content-type", "text/plain")
-          .end("user list");
-    });
-
-    userRouter.post("/add").handler(ctx -> {
-      log.info("hello: {}", ctx.request().headers());
-      ctx.response()
-          .putHeader("content-type", "text/plain")
-          .end("user add");
-    });
+    userRouter.get("/list").handler(service::list);
+    userRouter.post("/add").handler(service::add);
     return userRouter;
   }
 }

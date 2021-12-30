@@ -13,8 +13,8 @@ import io.vertx.ext.web.handler.BodyHandler;
 public class MainRoute {
   public Router create(Vertx vertx) {
     Router mainRouter = Router.router(vertx);
-    mainRouter.route().consumes("application/json");
-    mainRouter.route().produces("application/json");
+    mainRouter.route().consumes("application/json; charset=utf-8");
+    mainRouter.route().produces("application/json; charset=utf-8");
     mainRouter.route().handler(BodyHandler.create());
 
     mainRouter.mountSubRouter("/user", new UserRoute().create(vertx));
