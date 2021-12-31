@@ -20,3 +20,15 @@ vertx第一个测试实例, hello world
 === vertx-router
 
 vertx-router路由以及子路由
+
+=== vertx-router-restful
+
+vertx支持restful风格url定义
+
+```txt
+    userRouter.get("/list").handler(service::list);
+    userRouter.post("/info").handler(service::add);
+    userRouter.put("/info").handler(service::update);
+    userRouter.delete("/info/:userId").handler(service::delete);
+    userRouter.get("/info/:userId").handler(service::detail);
+```
