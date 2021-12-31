@@ -37,6 +37,7 @@
         <module>vertx-common</module>
         <module>vertx-helloworld</module>
         <module>vertx-route</module>
+        <module>vertx-route-restful</module>
     </modules>
 
     <dependencyManagement>
