@@ -41,12 +41,15 @@ public class UserService {
   }
 
   public void add(RoutingContext ctx) {
-    log.info("===> save user info");
+    UserVo userVo = ctx.getBodyAsJson().mapTo(UserVo.class);
+    log.info("===> save user: {}", userVo);
+    USERS.add(userVo);
     ctx.json(R.success("save"));
   }
 
   public void update(RoutingContext ctx) {
-    log.info("===> update user info");
+    UserVo userVo = ctx.getBodyAsJson().mapTo(UserVo.class);
+    log.info("===> update user: {}", userVo);
     ctx.json(R.success("update"));
   }
 
