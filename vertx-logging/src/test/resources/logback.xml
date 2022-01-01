@@ -1,0 +1,22 @@
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%yellow(%d{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%level) %green([%thread]) %cyan(%logger{50}) -
+                %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <logger name="io.netty" level="warn"/>
+    <logger name="io.vertx" level="info"/>
+    <logger name="org.hibernate" level="info"/>
+    <logger name="org.jboss.logging" level="info"/>
+    <logger name="org.testcontainers" level="warn"/>
+    <logger name="com.lance.logging" level="debug"/>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

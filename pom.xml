@@ -38,6 +38,7 @@
         <module>vertx-helloworld</module>
         <module>vertx-route</module>
         <module>vertx-route-restful</module>
+        <module>vertx-logging</module>
     </modules>
 
     <dependencyManagement>
