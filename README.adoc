@@ -32,3 +32,7 @@ vertx支持restful风格url定义
     userRouter.delete("/info/:userId").handler(service::delete);
     userRouter.get("/info/:userId").handler(service::detail);
 ```
+
+=== vertx-logging
+
+vertx配置log4j2
