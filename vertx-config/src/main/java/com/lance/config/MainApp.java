@@ -1,6 +1,6 @@
 package com.lance.config;
 
-import com.lance.exception.web.MainRoute;
+import com.lance.config.web.MainRoute;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.http.HttpServer;
@@ -29,4 +29,16 @@ public class MainApp extends AbstractVerticle {
 			}
 		});
 	}
+
+	/**
+	 * ConfigStoreOptions store = new ConfigStoreOptions()
+	 *   .setType("file")
+	 *   .setFormat("yaml")
+	 *   .setConfig(new JsonObject()
+	 *     .put("path", "my-config.yaml")
+	 *   );
+	 *
+	 * ConfigRetriever retriever = ConfigRetriever.create(vertx,
+	 *     new ConfigRetrieverOptions().addStore(store));
+	 */
 }

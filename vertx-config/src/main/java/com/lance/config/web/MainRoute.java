@@ -1,6 +1,6 @@
 package com.lance.config.web;
 
-import com.lance.exception.handler.DefaultExceptionHandler;
+import com.lance.config.handler.DefaultExceptionHandler;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;

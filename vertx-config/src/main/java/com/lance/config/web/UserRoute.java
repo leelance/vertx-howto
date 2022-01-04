@@ -1,6 +1,6 @@
 package com.lance.config.web;
 
-import com.lance.exception.service.UserService;
+import com.lance.config.service.UserService;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 

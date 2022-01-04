@@ -2,7 +2,7 @@ package com.lance.config.service;
 
 import com.lance.common.core.exception.ServiceException;
 import com.lance.common.core.result.R;
-import com.lance.exception.vo.UserVo;
+import com.lance.config.vo.UserVo;
 import io.vertx.ext.web.RoutingContext;
 import lombok.extern.slf4j.Slf4j;
 
