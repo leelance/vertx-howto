@@ -12,8 +12,8 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
         </Console>
-        <RollingRandomAccessFile name="FILE" fileName="logs/route-restful.log" append="true"
-                                 filePattern="logs/app-route.log.%d{yyyyMMdd}">
+        <RollingRandomAccessFile name="FILE" fileName="logs/app-except.log" append="true"
+                                 filePattern="logs/app-except.log.%d{yyyyMMdd}">
             <PatternLayout>
                 <Pattern>${FILE_LOG_PATTERN}</Pattern>
             </PatternLayout>
