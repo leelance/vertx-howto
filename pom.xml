@@ -39,6 +39,7 @@
         <module>vertx-route</module>
         <module>vertx-route-restful</module>
         <module>vertx-logging</module>
+        <module>vertx-exception</module>
     </modules>
 
     <dependencyManagement>
