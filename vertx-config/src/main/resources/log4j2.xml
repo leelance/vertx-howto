@@ -12,8 +12,8 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
         </Console>
-        <RollingRandomAccessFile name="FILE" fileName="logs/app-except.log" append="true"
-                                 filePattern="logs/app-except.log.%d{yyyyMMdd}">
+        <RollingRandomAccessFile name="FILE" fileName="logs/app-config.log" append="true"
+                                 filePattern="logs/app-config.log.%d{yyyyMMdd}">
             <PatternLayout>
                 <Pattern>${FILE_LOG_PATTERN}</Pattern>
             </PatternLayout>
@@ -24,7 +24,7 @@
     </Appenders>
 
     <Loggers>
-        <AsyncLogger name="com.lance.exception" level="debug" additivity="false" includeLocation="true">
+        <AsyncLogger name="com.lance.config" level="debug" additivity="false" includeLocation="true">
             <AppenderRef ref="Console"/>
             <appender-ref ref="FILE"/>
         </AsyncLogger>
