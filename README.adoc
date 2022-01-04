@@ -36,3 +36,7 @@ vertx支持restful风格url定义
 === vertx-logging
 
 vertx配置log4j2
+
+=== vertx-exception
+
+vertx 异常定义, 并增加统一异常拦截处理
