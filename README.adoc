@@ -40,3 +40,7 @@ vertx配置log4j2
 === vertx-exception
 
 vertx 异常定义, 并增加统一异常拦截处理
+
+=== vertx-config
+
+Vertx Config配置文件读取
