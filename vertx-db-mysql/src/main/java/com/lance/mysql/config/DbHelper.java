@@ -1,6 +1,7 @@
 package com.lance.mysql.config;
 
-import lombok.experimental.UtilityClass;
+import io.vertx.mysqlclient.MySQLPool;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -9,10 +10,10 @@ import lombok.extern.slf4j.Slf4j;
  * @author lance
  * @date 2022/1/8 20:05
  */
+@Data
 @Slf4j
-@UtilityClass
 public class DbHelper {
-  public final static DbHelper INSTANCE = new DbHelper();
+  private MySQLPool mySqlPool;
 
   public String get() {
     log.info("===>db helper print...");

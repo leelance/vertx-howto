@@ -37,8 +37,15 @@ public class MysqlApplication {
         .setType("file")
         .setFormat("yaml")
         .setOptional(true)
-        .setConfig(new JsonObject().put("path", "application.yaml").put("db", DbHelper.INSTANCE));
+        .setConfig(new JsonObject().put("path", "application.yaml"));
 
-    return ConfigRetriever.create(vertx, new ConfigRetrieverOptions().addStore(store));
+    return ConfigRetriever.create(vertx, new ConfigRetrieverOptions().addStore(store).addStore(createOther()));
+  }
+
+  private static ConfigStoreOptions createOther() {
+    JsonObject json = new JsonObject();
+    json.put("db", new DbHelper());
+
+    return new ConfigStoreOptions().setType("json").setConfig(json);
   }
 }

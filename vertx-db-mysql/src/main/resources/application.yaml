@@ -1,8 +1,15 @@
-user:
-  name: Jim
-  age: 20
-  birth: 2012-10-21
-  sex: 1
-
 server:
   port: 8000
+
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  database: v_example
+  username: root
+  password: li123456
+  charset: utf8
+  collation: utf8_general_ci
+  maxSize: 30
+  reconnectAttempts: 3
+  reconnectInterval: 1000
+  poolName: v-pool
