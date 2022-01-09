@@ -3,7 +3,6 @@ package com.lance.mysql.service;
 import com.lance.common.core.result.R;
 import com.lance.mysql.config.DbHelper;
 import com.lance.mysql.domain.UserInfo;
-import com.lance.mysql.vo.UserVo;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.mysqlclient.MySQLPool;
 import io.vertx.sqlclient.RowSet;
@@ -21,15 +20,6 @@ import java.util.List;
  */
 @Slf4j
 public class UserService {
-  private final static List<UserVo> USERS = new ArrayList<>();
-
-  static {
-    USERS.add(UserVo.of(1L, "Jim Green", "abc@23456", 21));
-    USERS.add(UserVo.of(2L, "Tom Dio", "abc@23456", 22));
-    USERS.add(UserVo.of(3L, "Mrs Mei", "abc@23456", 23));
-    USERS.add(UserVo.of(4L, "Tom Holland", "abc@23456", 24));
-    USERS.add(UserVo.of(5L, "Zendaya", "abc@23456", 25));
-  }
 
   /**
    * find list
@@ -90,15 +80,41 @@ public class UserService {
         });
   }
 
+  /**
+   * update user
+   */
   public void update(RoutingContext ctx) {
-    UserVo userVo = ctx.getBodyAsJson().mapTo(UserVo.class);
-    log.info("===> update user: {}", userVo);
-    ctx.json(R.success("update"));
+    UserInfo user = ctx.getBodyAsJson().mapTo(UserInfo.class);
+    if (user == null) {
+      ctx.json(R.fail("参数为空"));
+      return;
+    }
+
+    MySQLPool pool = DbHelper.client();
+    pool.preparedQuery("update t_user set username=?,password=?,age=?,status=?,update_time=now() where user_id=?")
+        .execute(Tuple.of(user.getUsername(), user.getPassword(), user.getAge(), user.getStatus(), user.getUserId()), rs -> {
+          if (rs.succeeded()) {
+            ctx.json(R.success("success"));
+          } else {
+            log.warn("Failure: ", rs.cause());
+            ctx.json(R.fail("fail"));
+          }
+        });
   }
 
+  /**
+   * delete one
+   */
   public void delete(RoutingContext ctx) {
     String userId = ctx.pathParam("userId");
-    log.info("===> delete user: {}", userId);
-    ctx.json(R.success("delete"));
+    MySQLPool pool = DbHelper.client();
+    pool.preparedQuery("delete From t_user where user_id=?").execute(Tuple.of(userId), rs -> {
+      if (rs.succeeded()) {
+        ctx.json(R.data("success"));
+      } else {
+        log.warn("Failure: ", rs.cause());
+        ctx.json(R.fail("fail"));
+      }
+    });
   }
 }
