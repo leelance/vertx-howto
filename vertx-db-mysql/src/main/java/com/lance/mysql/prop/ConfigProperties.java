@@ -1,6 +1,5 @@
 package com.lance.mysql.prop;
 
-import com.lance.mysql.config.DbHelper;
 import lombok.Data;
 
 /**
@@ -19,10 +18,6 @@ public class ConfigProperties {
 	 * server config
 	 */
 	private ServerProperties server;
-	/**
-	 * db
-	 */
-	private DbHelper db;
 
 	@Data
 	public static class MysqlProperties {

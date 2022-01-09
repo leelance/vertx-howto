@@ -7,6 +7,7 @@ import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * mysql application
@@ -14,6 +15,7 @@ import io.vertx.core.json.JsonObject;
  * @author lance
  * @date 2022/1/5 23:51
  */
+@Slf4j
 public class MysqlApplication {
 
   public static void main(String[] args) {
@@ -21,8 +23,16 @@ public class MysqlApplication {
     ConfigRetriever retriever = readYaml(vertx);
 
     retriever.getConfig(json -> {
-      DeploymentOptions options = new DeploymentOptions().setConfig(json.result());
-      vertx.deployVerticle(MainApp.class.getName(), options);
+      try {
+        JsonObject object = json.result();
+        DbHelper dbHelper = new DbHelper(object.getJsonObject("mysql"), vertx);
+        dbHelper.afterPropertiesSet();
+
+        DeploymentOptions options = new DeploymentOptions().setConfig(object);
+        vertx.deployVerticle(MainApp.class.getName(), options);
+      } catch (Exception ex) {
+        log.error("===> Vertx start fail: ", ex);
+      }
     });
   }
 
@@ -39,13 +49,6 @@ public class MysqlApplication {
         .setOptional(true)
         .setConfig(new JsonObject().put("path", "application.yaml"));
 
-    return ConfigRetriever.create(vertx, new ConfigRetrieverOptions().addStore(store).addStore(createOther()));
-  }
-
-  private static ConfigStoreOptions createOther() {
-    JsonObject json = new JsonObject();
-    json.put("db", new DbHelper());
-
-    return new ConfigStoreOptions().setType("json").setConfig(json);
+    return ConfigRetriever.create(vertx, new ConfigRetrieverOptions().addStore(store));
   }
 }
