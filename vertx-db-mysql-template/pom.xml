@@ -45,6 +45,11 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.13.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.lance.common</groupId>
             <artifactId>vertx-common-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>

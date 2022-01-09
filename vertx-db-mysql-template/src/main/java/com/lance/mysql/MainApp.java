@@ -1,10 +1,13 @@
 package com.lance.mysql;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.lance.mysql.prop.ConfigProperties;
 import com.lance.mysql.web.MainRoute;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.http.HttpServer;
+import io.vertx.core.json.jackson.DatabindCodec;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -18,6 +21,9 @@ public class MainApp extends AbstractVerticle {
 
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
+    //初始化相关配置
+    init();
+
     HttpServer server = vertx.createHttpServer();
     server.requestHandler(new MainRoute().create(vertx));
 
@@ -32,5 +38,13 @@ public class MainApp extends AbstractVerticle {
         startPromise.fail(http.cause());
       }
     });
+  }
+
+  /**
+   * 初始化相关配置
+   */
+  private void init() {
+    ObjectMapper mapper = DatabindCodec.mapper();
+    mapper.registerModule(new JavaTimeModule());
   }
 }
