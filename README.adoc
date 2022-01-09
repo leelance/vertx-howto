@@ -44,3 +44,11 @@ vertx 异常定义, 并增加统一异常拦截处理
 === vertx-config
 
 Vertx Config配置文件读取
+
+=== vertx-db-mysql
+
+mysql响应式客户端
+
+=== vertx-db-mysql-template
+
+mysql响应式客户端基于SqlTemplate实现
