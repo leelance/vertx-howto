@@ -1,15 +1,11 @@
 server:
-  port: 8000
+  port: 9000
 
-mysql:
-  host: 127.0.0.1
-  port: 3306
-  database: v_example
-  username: root
-  password: li123456
-  charset: utf8
-  collation: utf8_general_ci
-  maxSize: 30
-  reconnectAttempts: 3
-  reconnectInterval: 1000
-  poolName: v-pool
+redis:
+  urls:
+    - redis://127.0.0.1:6380/0
+  clientType: STANDALONE
+  poolName: p-red
+  poolCleanerInterval: 30000
+  maxPoolSize: 8
+  maxPoolWaiting: 32

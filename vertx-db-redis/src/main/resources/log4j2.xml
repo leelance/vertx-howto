@@ -9,18 +9,18 @@
     </Properties>
 
     <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
-        </Console>
-        <RollingRandomAccessFile name="FILE" fileName="logs/app-mysql.log" append="true"
-                                 filePattern="logs/app-mysql.log.%d{yyyyMMdd}">
-            <PatternLayout>
-                <Pattern>${FILE_LOG_PATTERN}</Pattern>
-            </PatternLayout>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="24" modulate="true"/>
-            </Policies>
-        </RollingRandomAccessFile>
+	    <Console name="Console" target="SYSTEM_OUT">
+		    <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
+	    </Console>
+	    <RollingRandomAccessFile name="FILE" fileName="logs/app-redis.log" append="true"
+	                             filePattern="logs/app-redis.log.%d{yyyyMMdd}">
+		    <PatternLayout>
+			    <Pattern>${FILE_LOG_PATTERN}</Pattern>
+		    </PatternLayout>
+		    <Policies>
+			    <TimeBasedTriggeringPolicy interval="24" modulate="true"/>
+		    </Policies>
+	    </RollingRandomAccessFile>
     </Appenders>
 
     <Loggers>
