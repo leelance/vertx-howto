@@ -1,5 +1,7 @@
 package com.lance.redis.prop;
 
+import io.vertx.redis.client.RedisClientType;
+import io.vertx.redis.client.RedisRole;
 import lombok.Data;
 
 /**
@@ -10,33 +12,31 @@ import lombok.Data;
  */
 @Data
 public class ConfigProperties {
-	/**
-	 * mysql config
-	 */
-	private MysqlProperties mysql;
-	/**
-	 * server config
-	 */
-	private ServerProperties server;
+  /**
+   * mysql config
+   */
+  private RedisProperties redis;
+  /**
+   * server config
+   */
+  private ServerProperties server;
 
-	@Data
-	public static class MysqlProperties {
-		private String host;
-		private int port = 3306;
-		private String database;
-		private String username;
-		private String password;
-		private String charset = "utf8";
-		private String collation = "utf8_general_ci";
+  @Data
+  public static class RedisProperties {
+    private RedisClientType clientType = RedisClientType.STANDALONE;
+    private String[] urls;
+    private String password;
 
-		private int maxSize = 10;
-		private int reconnectAttempts = 3;
-		private int reconnectInterval = 1000;
-		private String poolName = "p-mysql";
-	}
+    private String poolName = "redis-p";
+    private int poolCleanerInterval = 30_000;
+    private int maxPoolSize = 8;
+    private int maxPoolWaiting = 32;
+    private String masterName = "mymaster";
+    private RedisRole role = RedisRole.MASTER;
+  }
 
-	@Data
-	public static class ServerProperties {
-		private int port;
-	}
+  @Data
+  public static class ServerProperties {
+    private int port;
+  }
 }
