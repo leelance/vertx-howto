@@ -1,8 +1,7 @@
 package com.lance.mail.prop;
 
+import io.vertx.ext.mail.StartTLSOptions;
 import lombok.Data;
-
-import java.util.Date;
 
 /**
  * config properties
@@ -12,19 +11,20 @@ import java.util.Date;
  */
 @Data
 public class ConfigProperties {
-  private UserProperties user;
-  private ServerProperties server;
+	private MailProperties mail;
+	private ServerProperties server;
 
-  @Data
-  public static class UserProperties {
-    private String name;
-    private int age;
-    private Date birth;
-    private int sex;
-  }
+	@Data
+	public static class MailProperties {
+		private String hostname;
+		private String username;
+		private String password;
+		private int port;
+		private StartTLSOptions starttls = StartTLSOptions.REQUIRED;
+	}
 
-  @Data
-  public static class ServerProperties {
-    private int port;
-  }
+	@Data
+	public static class ServerProperties {
+		private int port;
+	}
 }

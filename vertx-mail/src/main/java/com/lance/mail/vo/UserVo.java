@@ -1,8 +1,8 @@
 package com.lance.mail.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  * user
@@ -11,15 +11,21 @@ import lombok.NoArgsConstructor;
  * @date 2021/12/30 09:56
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class UserVo {
-  private Long userId;
-  private String username;
-  private String password;
-  private int age;
-
-  public static UserVo of(Long userId, String username, String password, int age) {
-    return new UserVo(userId, username, password, age);
-  }
+	/**
+	 * 收件人
+	 */
+	private List<String> to;
+	/**
+	 * 抄送人
+	 */
+	private List<String> cc;
+	/**
+	 * 发送内容
+	 */
+	private String content;
+	/**
+	 * 邮件主题
+	 */
+	private String subject;
 }

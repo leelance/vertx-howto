@@ -1,7 +1,7 @@
 package com.lance.mail;
 
-import com.lance.config.prop.ConfigProperties;
-import com.lance.config.web.MainRoute;
+import com.lance.mail.prop.ConfigProperties;
+import com.lance.mail.web.MainRoute;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.http.HttpServer;
@@ -16,21 +16,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MainApp extends AbstractVerticle {
 
-  @Override
-  public void start(Promise<Void> startPromise) throws Exception {
-    HttpServer server = vertx.createHttpServer();
-    server.requestHandler(new MainRoute().create(vertx));
+	@Override
+	public void start(Promise<Void> startPromise) throws Exception {
+		HttpServer server = vertx.createHttpServer();
+		server.requestHandler(new MainRoute().create(vertx));
 
-    ConfigProperties properties = config().mapTo(ConfigProperties.class);
-    int port = properties.getServer().getPort();
-    log.info("===>json: {}, port: {}", properties, port);
-    server.listen(port, http -> {
-      if (http.succeeded()) {
-        startPromise.complete();
-        log.info("HTTP server started on port {}", port);
-      } else {
-        startPromise.fail(http.cause());
-      }
-    });
-  }
+		ConfigProperties properties = config().mapTo(ConfigProperties.class);
+		int port = properties.getServer().getPort();
+		log.info("===>json: {}, port: {}", properties, port);
+		server.listen(port, http -> {
+			if (http.succeeded()) {
+				startPromise.complete();
+				log.info("HTTP server started on port {}", port);
+			} else {
+				startPromise.fail(http.cause());
+			}
+		});
+	}
 }

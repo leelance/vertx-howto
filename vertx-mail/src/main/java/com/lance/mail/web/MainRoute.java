@@ -1,6 +1,6 @@
 package com.lance.mail.web;
 
-import com.lance.config.handler.DefaultExceptionHandler;
+import com.lance.mail.handler.DefaultExceptionHandler;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;

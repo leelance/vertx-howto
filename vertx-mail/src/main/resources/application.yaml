@@ -1,8 +1,9 @@
-user:
-  name: Jim
-  age: 20
-  birth: 2012-10-21
-  sex: 1
-
 server:
-  port: 8000
+  port: 18000
+
+mail:
+  hostname: smtp.mxhichina.com
+  username: service@zcsmart.com
+  password: zcsmart@123654
+  port: 25
+
