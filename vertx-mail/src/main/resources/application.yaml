@@ -3,7 +3,7 @@ server:
 
 mail:
   hostname: smtp.mxhichina.com
-  username: service@zcsmart.com
-  password: zcsmart@123654
+  username: service@lance.com
+  password: lance@123456
   port: 25
 
