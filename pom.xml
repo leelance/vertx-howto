@@ -45,6 +45,7 @@
         <module>vertx-db-mysql</module>
         <module>vertx-db-mysql-template</module>
         <module>vertx-db-redis</module>
+        <module>vertx-mail</module>
     </modules>
 
     <dependencyManagement>
