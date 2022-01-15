@@ -16,24 +16,40 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserService {
 
-	public void sendMessage(RoutingContext ctx) {
-		UserVo userVo = ctx.getBodyAsJson().mapTo(UserVo.class);
-		MailMessage message = new MailMessage();
-		message.setFrom(MailHelper.getFrom());
-		message.setTo(userVo.getTo());
-		message.setCc(userVo.getCc());
-		message.setText(userVo.getContent());
-		message.setSubject(userVo.getSubject());
+  public void sendMessage(RoutingContext ctx) {
+    UserVo userVo = ctx.getBodyAsJson().mapTo(UserVo.class);
+    userVo.setHtml(false);
+    send(ctx, userVo);
+  }
 
-		MailHelper.getMailClient().sendMail(message)
-				.onSuccess(r -> {
-					log.info("===>send content mail success: {}", r);
-					ctx.json(R.data(r.toJson()));
-				})
-				.onFailure(e -> {
-					log.error("===> send content mail fail: ", e);
-					ctx.json(R.data(e.getMessage()));
-				});
+  public void sendHtmlMessage(RoutingContext ctx) {
+    UserVo userVo = ctx.getBodyAsJson().mapTo(UserVo.class);
+    String html = "This is html text <a href=\"https://github.com/leelance/vertx-howto\" target=\"_blank\">Vertx--How To</a>";
+    userVo.setContent(html);
+    userVo.setHtml(true);
+    send(ctx, userVo);
+  }
 
-	}
+  private void send(RoutingContext ctx, UserVo userVo) {
+    MailMessage message = new MailMessage();
+    message.setFrom(MailHelper.getFrom());
+    message.setTo(userVo.getTo());
+    message.setCc(userVo.getCc());
+    message.setSubject(userVo.getSubject());
+    if (userVo.isHtml()) {
+      message.setHtml(userVo.getContent());
+    } else {
+      message.setText(userVo.getContent());
+    }
+
+    MailHelper.getMailClient().sendMail(message)
+        .onSuccess(r -> {
+          log.info("===>send content mail success: {}", r);
+          ctx.json(R.data(r.toJson()));
+        })
+        .onFailure(e -> {
+          log.error("===> send content mail fail: ", e);
+          ctx.json(R.data(e.getMessage()));
+        });
+  }
 }

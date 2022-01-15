@@ -12,20 +12,24 @@ import java.util.List;
  */
 @Data
 public class UserVo {
-	/**
-	 * 收件人
-	 */
-	private List<String> to;
-	/**
-	 * 抄送人
-	 */
-	private List<String> cc;
-	/**
-	 * 发送内容
-	 */
-	private String content;
-	/**
-	 * 邮件主题
-	 */
-	private String subject;
+  /**
+   * 收件人
+   */
+  private List<String> to;
+  /**
+   * 抄送人
+   */
+  private List<String> cc;
+  /**
+   * 发送内容
+   */
+  private String content;
+  /**
+   * 邮件主题
+   */
+  private String subject;
+  /**
+   * 是否是html内容
+   */
+  private boolean isHtml = false;
 }
