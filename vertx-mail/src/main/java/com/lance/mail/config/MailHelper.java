@@ -28,7 +28,7 @@ public class MailHelper {
 	private static String from;
 
 	/**
-	 * 初始化redis连接
+	 * 初始化mail client连接
 	 */
 	public void afterPropertiesSet() {
 		ConfigProperties.MailProperties properties = object.mapTo(ConfigProperties.MailProperties.class);

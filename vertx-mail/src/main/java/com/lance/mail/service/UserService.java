@@ -10,6 +10,7 @@ import io.vertx.ext.mail.MailAttachment;
 import io.vertx.ext.mail.MailMessage;
 import io.vertx.ext.web.RoutingContext;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.net.URL;
@@ -102,9 +103,10 @@ public class UserService {
    * @return path
    */
   private String getPathString(String fileName) {
-    if (fileName == null) {
-      throw new NullPointerException("文件名字不能为空");
+    if (StringUtils.isBlank(fileName)) {
+      throw new RuntimeException("filename is null");
     }
+
     URL path = Thread.currentThread().getContextClassLoader().getResource(fileName);
     if (path != null && path.getPath().contains(SUFFIX_JAR)) {
       return fileName;
