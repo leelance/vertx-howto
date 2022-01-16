@@ -1,6 +1,6 @@
 package com.lance.metrics;
 
-import com.lance.metrics.prop.ConfigProperties;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.vertx.config.ConfigRetriever;
 import io.vertx.config.ConfigRetrieverOptions;
 import io.vertx.config.ConfigStoreOptions;
@@ -9,8 +9,14 @@ import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
+import io.vertx.micrometer.Label;
+import io.vertx.micrometer.MetricsNaming;
 import io.vertx.micrometer.MicrometerMetricsOptions;
 import io.vertx.micrometer.VertxPrometheusOptions;
+import io.vertx.micrometer.backends.BackendRegistries;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Metrics application
@@ -21,13 +27,15 @@ import io.vertx.micrometer.VertxPrometheusOptions;
 public class MetricsApplication {
 
   public static void main(String[] args) {
-    Vertx vertx = Vertx.vertx();
+    VertxOptions vertxOptions = new VertxOptions();
+    //init metrics
+    initMetric(vertxOptions);
+
+    Vertx vertx = Vertx.vertx(vertxOptions);
     ConfigRetriever retriever = readYaml(vertx);
 
     retriever.getConfig(json -> {
       JsonObject object = json.result();
-      //init metrics
-      initMetric(object.getJsonObject("metrics"));
       DeploymentOptions options = new DeploymentOptions().setConfig(object);
       vertx.deployVerticle(MainApp.class.getName(), options);
     });
@@ -36,16 +44,19 @@ public class MetricsApplication {
   /**
    * init metrics
    */
-  private static void initMetric(JsonObject object) {
-    ConfigProperties.MetricsProperties prop = object.mapTo(ConfigProperties.MetricsProperties.class);
-
-    Vertx.vertx(new VertxOptions().setMetricsOptions(
+  private static void initMetric(VertxOptions vertxOptions) {
+    MeterRegistry registry = BackendRegistries.getDefaultNow();
+    vertxOptions.setMetricsOptions(
         new MicrometerMetricsOptions()
+            .setMetricsNaming(MetricsNaming.v4Names())
+            .setLabels(Arrays.stream(Label.values()).collect(Collectors.toSet()))
             .setPrometheusOptions(new VertxPrometheusOptions().setEnabled(true)
                 .setStartEmbeddedServer(true)
-                .setEmbeddedServerOptions(new HttpServerOptions().setPort(prop.getPort()))
-                .setEmbeddedServerEndpoint(prop.getEndpoint()))
-            .setEnabled(prop.isEnabled())));
+                .setEmbeddedServerOptions(new HttpServerOptions().setPort(18001))
+                .setEmbeddedServerEndpoint("/metrics/exporter"))
+            .setRegistryName("vertx-metric")
+            .setMicrometerRegistry(registry)
+            .setEnabled(true));
   }
 
   /**
