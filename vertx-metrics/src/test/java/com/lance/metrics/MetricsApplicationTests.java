@@ -1,4 +1,4 @@
-package com.lance.metrics.vertxmetrics;
+package com.lance.metrics;
 
 import org.junit.jupiter.api.Test;
 

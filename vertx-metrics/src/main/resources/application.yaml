@@ -1,0 +1,8 @@
+server:
+  port: 18000
+
+metrics:
+  enabled: true
+  port: 18001
+  endpoint: /metrics/exporter
+
