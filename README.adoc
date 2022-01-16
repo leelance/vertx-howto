@@ -52,3 +52,12 @@ mysql响应式客户端
 === vertx-db-mysql-template
 
 mysql响应式客户端基于SqlTemplate实现
+
+=== vertx-db-redis
+Redis vertx客户端
+
+=== vertx-mail
+Mail vertx客户端
+
+=== vertx-metrics
+Metric Prometheus 客户端
