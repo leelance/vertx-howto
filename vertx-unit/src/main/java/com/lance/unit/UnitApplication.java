@@ -14,6 +14,7 @@ import io.vertx.core.json.JsonObject;
  * @date 2022/1/20 11:37
  */
 public class UnitApplication {
+
   public static void main(String[] args) {
     Vertx vertx = Vertx.vertx();
     ConfigRetriever retriever = readYaml(vertx);
