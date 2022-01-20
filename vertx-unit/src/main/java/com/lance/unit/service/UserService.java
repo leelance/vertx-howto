@@ -1,6 +1,5 @@
 package com.lance.unit.service;
 
-import com.lance.common.core.exception.ServiceException;
 import com.lance.common.core.result.R;
 import com.lance.unit.prop.ConfigProperties;
 import com.lance.unit.vo.UserVo;
@@ -11,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * user service
@@ -42,7 +42,8 @@ public class UserService {
     String userId = ctx.pathParam("userId");
     log.info("===> detail user: {}", userId);
 
-    throw ServiceException.of("10001", "用户Id查询失败,用户Id: " + userId);
+    List<UserVo> list = USERS.stream().filter(u -> Long.valueOf(userId).equals(u.getUserId())).collect(Collectors.toList());
+    ctx.json(R.data(list));
   }
 
   public void add(RoutingContext ctx) {
