@@ -1,7 +1,7 @@
 package com.lance.unit;
 
-import com.lance.config.prop.ConfigProperties;
-import com.lance.config.web.MainRoute;
+import com.lance.unit.prop.ConfigProperties;
+import com.lance.unit.web.MainRoute;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.http.HttpServer;

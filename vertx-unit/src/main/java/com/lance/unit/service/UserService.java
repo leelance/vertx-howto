@@ -2,8 +2,8 @@ package com.lance.unit.service;
 
 import com.lance.common.core.exception.ServiceException;
 import com.lance.common.core.result.R;
-import com.lance.config.prop.ConfigProperties;
-import com.lance.config.vo.UserVo;
+import com.lance.unit.prop.ConfigProperties;
+import com.lance.unit.vo.UserVo;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;

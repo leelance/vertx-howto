@@ -5,4 +5,4 @@ user:
   sex: 1
 
 server:
-  port: 8000
+  port: 18002
