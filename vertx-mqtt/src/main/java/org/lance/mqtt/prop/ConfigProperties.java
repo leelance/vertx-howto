@@ -15,5 +15,6 @@ public class ConfigProperties {
   @Data
   public static class ServerProperties {
     private int port;
+    private String host;
   }
 }

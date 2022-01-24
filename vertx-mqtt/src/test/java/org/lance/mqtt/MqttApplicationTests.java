@@ -3,6 +3,7 @@ package org.lance.mqtt;
 import io.vertx.core.Vertx;
 import io.vertx.junit5.VertxExtension;
 import io.vertx.mqtt.MqttClient;
+import io.vertx.mqtt.MqttClientOptions;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,14 +18,19 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @Slf4j
 @ExtendWith(VertxExtension.class)
 class MqttApplicationTests {
-  MqttClient client = null;
+  private final static String CLIENT_ID = "clientHello";
+  private MqttClient client = null;
 
   @BeforeEach
   void init(Vertx vertx) {
-    client = MqttClient.create(vertx);
+    client = MqttClient.create(vertx, create());
     client.connect(18003, "127.0.0.1", s -> {
-      client.disconnect();
-    });
+      if (s.succeeded()) {
+        log.info("Client connect success.");
+      } else {
+        log.error("Client connect fail: ", s.cause());
+      }
+    }).exceptionHandler(event -> log.error("client fail: ", event.getCause()));
   }
 
   @Test
@@ -38,5 +44,11 @@ class MqttApplicationTests {
         .subscribe("rpi2/temp", 2);
 
     Thread.sleep(60_000L);
+  }
+
+  private MqttClientOptions create() {
+    MqttClientOptions options = new MqttClientOptions();
+    options.setClientId(CLIENT_ID);
+    return options;
   }
 }
