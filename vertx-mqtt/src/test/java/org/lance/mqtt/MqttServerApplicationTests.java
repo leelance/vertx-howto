@@ -5,7 +5,6 @@ import io.vertx.junit5.VertxExtension;
 import io.vertx.mqtt.MqttClient;
 import io.vertx.mqtt.MqttClientOptions;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -17,13 +16,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
  */
 @Slf4j
 @ExtendWith(VertxExtension.class)
-class MqttApplicationTests {
+class MqttServerApplicationTests {
+  Vertx vertx = Vertx.vertx();
   private final static String CLIENT_ID = "clientHello";
-  private MqttClient client = null;
 
-  @BeforeEach
-  void init(Vertx vertx) {
-    client = MqttClient.create(vertx, create());
+  @Test
+  void clientConnect() throws InterruptedException {
+    MqttClient client = MqttClient.create(vertx, create());
     client.connect(18003, "127.0.0.1", s -> {
       if (s.succeeded()) {
         log.info("Client connect success.");
@@ -31,19 +30,15 @@ class MqttApplicationTests {
         log.error("Client connect fail: ", s.cause());
       }
     }).exceptionHandler(event -> log.error("client fail: ", event.getCause()));
-  }
 
-  @Test
-  void clientConnect() throws InterruptedException {
-    client.publishHandler(s -> {
-              System.out.println("There are new message in topic: " + s.topicName());
-              System.out.println("Content(as string) of the message: " + s.payload().toString());
-              System.out.println("QoS: " + s.qosLevel());
-            }
-        )
-        .subscribe("rpi2/temp", 2);
+    client.subscribe("hello_topic", 0, e -> {
+      if (e.succeeded()) {
+        log.info("===>subscribe success: {}", e.result());
+      } else {
+        log.error("===>subscribe fail: ", e.cause());
+      }
+    });
 
-    Thread.sleep(60_000L);
   }
 
   private MqttClientOptions create() {

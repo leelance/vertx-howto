@@ -13,7 +13,7 @@ import io.vertx.core.json.JsonObject;
  * @author lance
  * @date 2022/1/21 19:20
  */
-public class MqttApplication {
+public class MqttServerApplication {
 
   public static void main(String[] args) {
     Vertx vertx = Vertx.vertx();
@@ -21,7 +21,7 @@ public class MqttApplication {
 
     retriever.getConfig(json -> {
       DeploymentOptions options = new DeploymentOptions().setConfig(json.result());
-      vertx.deployVerticle(MainApp.class.getName(), options);
+      vertx.deployVerticle(MqttServerApp.class.getName(), options);
     });
   }
 
