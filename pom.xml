@@ -49,6 +49,7 @@
         <module>vertx-metrics</module>
         <module>vertx-unit</module>
         <module>vertx-mqtt</module>
+        <module>vertx-multi-verticle</module>
     </modules>
 
     <dependencyManagement>
