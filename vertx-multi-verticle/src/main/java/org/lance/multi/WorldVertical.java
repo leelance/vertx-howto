@@ -2,6 +2,8 @@ package org.lance.multi;
 
 import com.lance.common.core.result.R;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.shareddata.LocalMap;
+import io.vertx.core.shareddata.SharedData;
 import io.vertx.ext.web.Router;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,7 @@ import org.lance.multi.prop.ConfigProperties;
 @Slf4j
 @AllArgsConstructor
 public class WorldVertical extends AbstractVerticle {
+  public final static String DEFAULT_LOCAL_MAP_NAME = "default_local_map_name";
   private final Router router;
 
   @Override
@@ -23,7 +26,11 @@ public class WorldVertical extends AbstractVerticle {
     router.route("/world").handler(ctx -> {
       String name = ctx.queryParam("name").get(0);
 
-      log.info("===> Request world name: {}", name);
+      SharedData sd = ctx.vertx().sharedData();
+      LocalMap<String, String> sharedData = sd.getLocalMap(DEFAULT_LOCAL_MAP_NAME);
+      sharedData.put("shareKey", "this is share world");
+
+      log.info("===> Request world name: {}, share put data: {}", name, sharedData);
       ctx.json(R.success("World " + name));
     });
 

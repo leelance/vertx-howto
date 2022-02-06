@@ -2,12 +2,11 @@ package org.lance.multi;
 
 import com.lance.common.core.result.R;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.shareddata.SharedData;
 import io.vertx.ext.web.Router;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.lance.multi.prop.ConfigProperties;
-
-import java.util.Map;
 
 /**
  * hello
@@ -24,9 +23,9 @@ public class HelloVertical extends AbstractVerticle {
   public void start() {
     router.route("/hello").handler(ctx -> {
       String name = ctx.queryParam("name").get(0);
-      Map<String, Object> map = ctx.data();
+      SharedData sd = ctx.vertx().sharedData();
 
-      log.info("===> Request hello name: {}, data: {}", name, map);
+      log.info("===> Request hello name: {}, share get data: {}", name, sd.getLocalMap(WorldVertical.DEFAULT_LOCAL_MAP_NAME));
       ctx.json(R.success("Hello " + name));
     });
 
