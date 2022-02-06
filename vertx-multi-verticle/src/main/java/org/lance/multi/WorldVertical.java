@@ -5,6 +5,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.ext.web.Router;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.lance.multi.prop.ConfigProperties;
 
 /**
  * hello vertical
@@ -26,9 +27,11 @@ public class WorldVertical extends AbstractVerticle {
       ctx.json(R.success("World " + name));
     });
 
+    ConfigProperties properties = config().mapTo(ConfigProperties.class);
+    int port = properties.getServer().getPort();
     vertx.createHttpServer()
         .requestHandler(router)
-        .listen(18004, http -> {
+        .listen(port, http -> {
           if (http.succeeded()) {
             log.info("World server started on port {}", http.result().actualPort());
           } else {
