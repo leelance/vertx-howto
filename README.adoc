@@ -68,3 +68,11 @@ Metric Prometheus 客户端
 === vertx-unit
 
 junit 5单元测试
+
+=== vertx-mqtt
+
+Vertx之MQTT客户端服务端发送
+
+=== vertx-multi-verticle
+
+Vertx之Multi Verticle共享数据
