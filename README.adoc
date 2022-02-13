@@ -76,3 +76,7 @@ Vertx之MQTT客户端服务端发送
 === vertx-multi-verticle
 
 Vertx之Multi Verticle共享数据
+
+=== vertx-rabbitmq
+
+rabbitMq消息发送
