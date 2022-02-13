@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_multiple_files = false;
+option java_outer_classname = "Emp";
+package com.lance.grpc.empty.gen;
+
+message Empty {}
+
+service HeartbeatService {
+  // One empty request followed by one empty response.
+  rpc EmptyCall(Empty) returns (Empty);
+}

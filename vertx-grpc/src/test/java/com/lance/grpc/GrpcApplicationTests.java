@@ -1,4 +1,4 @@
-package org.lance.grpc;
+package com.lance.grpc;
 
 import org.junit.jupiter.api.Test;
 

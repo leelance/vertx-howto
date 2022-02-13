@@ -12,8 +12,8 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
         </Console>
-        <RollingRandomAccessFile name="FILE" fileName="logs/app-mqtt.log" append="true"
-                                 filePattern="logs/app-mqtt.log.%d{yyyyMMdd}">
+        <RollingRandomAccessFile name="FILE" fileName="logs/app-grpc.log" append="true"
+                                 filePattern="logs/app-grpc.log.%d{yyyyMMdd}">
             <PatternLayout>
                 <Pattern>${FILE_LOG_PATTERN}</Pattern>
             </PatternLayout>
@@ -24,7 +24,7 @@
     </Appenders>
 
     <Loggers>
-        <AsyncLogger name="com.lance.mqtt" level="debug" additivity="false" includeLocation="true">
+        <AsyncLogger name="com.lance.grpc" level="debug" additivity="false" includeLocation="true">
             <AppenderRef ref="Console"/>
             <appender-ref ref="FILE"/>
         </AsyncLogger>
