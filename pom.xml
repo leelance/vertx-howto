@@ -50,6 +50,7 @@
         <module>vertx-unit</module>
         <module>vertx-mqtt</module>
         <module>vertx-multi-verticle</module>
+        <module>vertx-rabbitmq</module>
     </modules>
 
     <dependencyManagement>
