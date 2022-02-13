@@ -10,7 +10,7 @@ import lombok.Data;
  */
 @Data
 public class ConfigProperties {
-  private MqProperties mq;
+  private MqProperties rabbit;
   private ServerProperties server;
 
   @Data
@@ -39,10 +39,13 @@ public class ConfigProperties {
     private int networkRecoveryInterval = 500;
     private boolean automaticRecoveryEnabled = true;
 
+    private int reconnectAttempts = 0;
+    private int reconnectInterval = 500;
   }
 
   @Data
   public static class ServerProperties {
     private int port;
+    private String host;
   }
 }

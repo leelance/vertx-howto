@@ -4,6 +4,7 @@ import com.lance.rabbit.prop.ConfigProperties;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.rabbitmq.RabbitMQClient;
+import io.vertx.rabbitmq.RabbitMQConsumer;
 import io.vertx.rabbitmq.RabbitMQOptions;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,8 @@ public class ClientHelper {
     config.setHost(prop.getHost());
     config.setPort(prop.getPort());
     config.setVirtualHost(prop.getVirtualHost());
+    config.setReconnectAttempts(prop.getReconnectAttempts());
+    config.setReconnectInterval(prop.getReconnectInterval());
     config.setConnectionTimeout(prop.getConnectionTimeout());
     config.setRequestedHeartbeat(prop.getRequestedHeartbeat());
     config.setHandshakeTimeout(prop.getHandshakeTimeout());
@@ -48,9 +51,24 @@ public class ClientHelper {
     // Connect
     client.start(asyncResult -> {
       if (asyncResult.succeeded()) {
+        consumer();
         log.warn("RabbitMQ successfully connected!");
       } else {
         log.error("Fail to connect to RabbitMQ {}", asyncResult.cause().getMessage());
+      }
+    });
+  }
+
+  private void consumer() {
+    client.basicConsumer(MqConst.HELLO_ROUTING_KEY, result -> {
+      if (result.succeeded()) {
+        RabbitMQConsumer mqConsumer = result.result();
+        mqConsumer.handler(message -> {
+          log.info("Got message: {}", message.body().toString());
+          log.info("Message[exchange: {}, routeKey: {}] receive success!", message.envelope().getExchange(), message.envelope().getRoutingKey());
+        });
+      } else {
+        log.error("===>Queue receive fail: ", result.cause());
       }
     });
   }

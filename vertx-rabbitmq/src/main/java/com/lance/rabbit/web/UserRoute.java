@@ -17,8 +17,6 @@ public class UserRoute {
     UserService service = new UserService();
 
     userRouter.post("/send/message").handler(service::sendMessage);
-    userRouter.post("/send/html/message").handler(service::sendHtmlMessage);
-    userRouter.post("/send/attach/message").handler(service::sendAttachMessage);
     return userRouter;
   }
 }
