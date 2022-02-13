@@ -51,6 +51,7 @@
         <module>vertx-mqtt</module>
         <module>vertx-multi-verticle</module>
         <module>vertx-rabbitmq</module>
+        <module>vertx-grpc</module>
     </modules>
 
     <dependencyManagement>
