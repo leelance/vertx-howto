@@ -80,3 +80,7 @@ Vertx之Multi Verticle共享数据
 === vertx-rabbitmq
 
 rabbitMq消息发送
+
+=== vertx-grpc
+
+Vertx 集成Grpc
