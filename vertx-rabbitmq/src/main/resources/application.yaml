@@ -1,4 +1,16 @@
 server:
   host: 127.0.0.1
-  port: 18003
+  port: 18005
 
+rabbit:
+  host: 127.0.0.1
+  port: 18003
+  username: root
+  password: root
+  virtualHost: /root
+  connectionTimeout: 6000
+  requestedHeartbeat: 60
+  handshakeTimeout: 6000
+  requestedChannelMax: 5
+  networkRecoveryInterval: 500
+  automaticRecoveryEnabled: true
